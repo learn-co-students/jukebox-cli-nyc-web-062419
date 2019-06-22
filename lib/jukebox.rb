@@ -18,19 +18,19 @@ def help
 	- exit : exits this program"
 end
 
-def list(my_songs)
-	my_songs.each_with_index do |song, index|
+def list(songs)
+	songs.each_with_index do |song, index|
 	puts "#{index + 1}. #{song}"
   end
 end
 
-def play(my_songs)
+def play(songs)
 	puts "Please enter a song name or number:"
 	input = gets.chomp 
-		if my_songs.include?(input)
+		if songs.include?(input)
 			puts "Playing #{input}"
-		elsif (1..my_songs.length).to_a.include?(input.to_i)
-			puts "Playing #{my_songs[input.to_i - 1]}"
+		elsif (1..songs.length).to_a.include?(input.to_i)
+			puts "Playing #{songs[input.to_i - 1]}"
 		else 
 			puts "Invalid input, please try again"
 		end		
