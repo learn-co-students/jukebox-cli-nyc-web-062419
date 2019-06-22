@@ -18,46 +18,45 @@ def help
 	- exit : exits this program"
 end
 
-def list(array)
-	array.each_with_index do |song, index|
+def list(my_songs)
+	my_songs.each_with_index do |song, index|
 	puts "#{index + 1}. #{song}"
   end
 end
 
-def play(songs_array)
+def play(my_songs)
 	puts "Please enter a song name or number:"
 	input = gets.chomp 
-	songs_array.each_with_index do |songs, index|
-		index = index + 1
-		if input.include?(songs)
-			puts "Playing #{songs}"
-		elsif input.include?(index.to_s)
-			puts "Playing #{songs}"
-		else
+		if my_songs.include?(input)
+			puts "Playing #{input}"
+		elsif (1..my_songs.length).to_a.include?(input.to_i)
+			puts "Playing #{my_songs[input.to_i - 1]}"
+		else 
 			puts "Invalid input, please try again"
-		end
-	end
+		end		
 end
 
 def exit_jukebox
 	puts "Goodbye"
 end
 
-def run(input)
+def run(songs_array)
 	help 
 	puts "Please enter a command:"
 	input = gets.chomp
-	if input == "exit" 
+	if input == "exit"
 		exit_jukebox
 	elsif input == "list"
-		list(array)
+		list(songs_array)
+		run(songs_array)
 	elsif input == "play"
-		play(array)
+		play(songs_array)
+		run(songs_array)
 	elsif input == "help"
-		help
+		run(songs_array)
 	else 
-		puts "Please enter a command:"
-		input = gets.chomp
+		puts "Invalid input, please try again"
+		run(songs_array)
 	end
 end
 
